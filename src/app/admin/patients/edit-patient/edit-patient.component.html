@@ -31,19 +31,23 @@
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="first" required>
-                    <mat-error *ngIf="patientForm.get('first').hasError('required')">
-                      First name is required
+                    <mat-label>Registration Number</mat-label>
+                    <input matInput formControlName="patientRegistrationNumber" required readonly>
+                    <mat-error *ngIf="patientForm.get('patientRegistrationNumber').hasError('required')">
+                      Patient Registration Number is required
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="last">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="fullName" required>
+                    <mat-error *ngIf="patientForm.get('fullName').hasError('required')">
+                      Name is required
+                    </mat-error>
                   </mat-form-field>
                 </div>
+
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
@@ -65,7 +69,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Mobile</mat-label>
-                    <input matInput formControlName="mobile" type="number">
+                    <input matInput formControlName="contactNumber" type="number">
                   </mat-form-field>
                 </div>
               </div>
@@ -102,10 +106,10 @@
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Marital Status</mat-label>
                     <mat-select formControlName="maritalStatus" required>
-                      <mat-option [value]="'1'">
+                      <mat-option [value]="'Single'">
                         Single
                       </mat-option>
-                      <mat-option [value]="'2'">
+                      <mat-option [value]="'Married'">
                         Married
                       </mat-option>
                     </mat-select>
@@ -119,15 +123,52 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Address</mat-label>
-                    <textarea matInput formControlName="address"></textarea>
+                    <textarea matInput formControlName="address" required></textarea>
+                    <mat-error *ngIf="patientForm.get('dob').hasError('required')">
+                      Patient Address is required
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" required>
+                    <mat-error *ngIf="patientForm.get('city').hasError('required')">
+                      City name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Nationality</mat-label>
+                    <input matInput formControlName="nationality" required>
+                    <mat-error *ngIf="patientForm.get('nationality').hasError('required')">
+                      nationality is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3">
                     <mat-label>Blood Group</mat-label>
-                    <input matInput formControlName="bGroup">
+                    <mat-select formControlName="bGroup" required>
+                      <mat-option [value]="'A+'">
+                        A+
+                      </mat-option>
+                      <mat-option [value]="'B+'">
+                        B+
+                      </mat-option>
+                      <mat-option [value]="'O+'">
+                        O+
+                      </mat-option>
+                      <mat-option [value]="'AB+'">
+                        AB+
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
@@ -137,20 +178,60 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <mat-form-field class="example-full-width mb-3">
-                    <mat-label>Sugger</mat-label>
-                    <input matInput formControlName="sugger">
-                  </mat-form-field>
+              <div formGroupName="guardian">
+                <div class="row">
+                  <div class="col-12">
+                    <p>Guardian Details</p>
+                  </div>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                  <mat-form-field class="example-full-width mb-3">
-                    <mat-label>Injury/Condition</mat-label>
-                    <input matInput formControlName="injury">
-                  </mat-form-field>
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3">
+                      <mat-label>Full Name</mat-label>
+                      <input type="text" matInput formControlName="fullName">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3">
+                      <mat-label>Guardian Type</mat-label>
+                      <input type="text" matInput formControlName="guardianType">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3">
+                      <mat-label>Gender</mat-label>
+                      <mat-select formControlName="gender">
+                        <mat-option [value]="'Male'">
+                          Male
+                        </mat-option>
+                        <mat-option [value]="'Female'">
+                          Female
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                    <mat-form-field class="example-full-width mb-3">
+                      <mat-label>Contact Number</mat-label>
+                      <input type="tel" matInput formControlName="contactNumber">
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
+
+              <!-- <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Upload Image</mat-label>
+                    <ngx-mat-file-input formControlName="uploadImg">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>face</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div> -->
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                   <button class="mr-3" [disabled]="!patientForm.valid " mat-raised-button

@@ -9,10 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class EditPatientComponent {
   patientForm: FormGroup;
   formdata = {
-    first: 'Pooja',
-    last: 'Sarma',
+    patientRegistrationNumber: 'HS111',
+    fullName: 'Pooja',
+    // last: 'Sarma',
     gender: 'Female',
-    mobile: '123456789',
+    contactNumber: '123456789',
     age: '23',
     email: 'test@example.com',
     maritalStatus: '1',
@@ -31,25 +32,34 @@ export class EditPatientComponent {
   }
   createContactForm(): FormGroup {
     return this.fb.group({
-      first: [
-        this.formdata.first,
-        [Validators.required, Validators.pattern('[a-zA-Z]+')],
+      fullName: [
+        this.formdata.fullName,
+        [Validators.required],
       ],
-      last: [this.formdata.last],
+      // last: [this.formdata.last],
       gender: [this.formdata.gender, [Validators.required]],
-      mobile: [this.formdata.mobile, [Validators.required]],
+      contactNumber: [this.formdata.contactNumber, [Validators.required]],
       age: [this.formdata.age],
       maritalStatus: [this.formdata.maritalStatus],
       email: [
         this.formdata.email,
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
+      patientRegistrationNumber: [this.formdata.patientRegistrationNumber],
       bGroup: [this.formdata.bGroup],
       bPresure: [this.formdata.bPresure],
       address: [this.formdata.address],
       dob: [this.formdata.dob, [Validators.required]],
-      sugger: [this.formdata.sugger],
-      injury: [this.formdata.injury],
+      // sugger: [this.formdata.sugger],
+      // injury: [this.formdata.injury],
+      nationality: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      guardian: this.fb.group({
+        guardianType: [''],
+        fullName: [''],
+        gender: [''],
+        contactNumber: ['']
+      })
     });
   }
 }

@@ -138,7 +138,7 @@
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editCall(row)"
+                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewCall()"
                   [style.cursor]="'pointer'" matRipple>
                 </mat-row>
               </mat-table>
