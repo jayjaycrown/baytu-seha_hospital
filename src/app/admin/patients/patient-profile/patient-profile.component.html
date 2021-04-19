@@ -21,34 +21,42 @@
     </div>
     <div class="row clearfix">
       <div class="col-lg-4 col-md-12">
-        <div class="card">
+        <!-- <div class="card">
           <div class="contact-grid profile-image">
             <img src="assets/images/user/usrbig4.jpg" alt="">
           </div>
-        </div>
+        </div> -->
         <div class="card">
           <div class="header">
             <h2>About Patient</h2>
           </div>
           <div class="tab-pane body active" id="about">
-            <p class="text-default">Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has
-              been the industry's standard dummy text ever since the 1500s, when an unknown
-              printer
-              took a galley of type and scrambled it to make a type specimen book. It has
-              survived
-              not only five centuries, but also the leap into electronic typesetting, remaining
-              essentially
-              unchanged.</p>
-            <small class="text-muted">Email address: </small>
-            <p>john@gmail.com</p>
+            <small class="text-muted"> Reg No.</small>
+            <p> {{ patientDetails.patientRegistrationNumber }} </p>
+            <hr>
+            <small class="text-muted">Name: </small>
+            <p> {{patientDetails.fullName}} </p>
+            <hr>
+            <small class="text-muted">Email Address: </small>
+            <p> {{patientDetails.email}} </p>
+            <hr>
+            <small class="text-muted">Gender: </small>
+            <p> {{patientDetails.gender}} </p>
             <hr>
             <small class="text-muted">Phone: </small>
-            <p>+91 1234567890</p>
+            <p>{{patientDetails.contactNumber}}</p>
             <hr>
             <small class="text-muted">Address: </small>
-            <p>345, Sarju Appt., Mota Varacha, Surat
-              Gujarat, India.</p>
+            <p>{{patientDetails.address}}</p>
+            <hr>
+            <small class="text-muted">City: </small>
+            <p>{{patientDetails.city}}</p>
+            <hr>
+            <small class="text-muted">Date of Birth: </small>
+            <p>{{patientDetails.dob | date}}</p>
+            <hr>
+            <small class="text-muted">Marital Status: </small>
+            <p>{{patientDetails.maritalStatus}}</p>
             <hr>
           </div>
         </div>
@@ -57,7 +65,7 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" aria-expanded="true">
             <div class="row clearfix">
-              <div class="col-lg-12 col-md-12 col-sm-12">
+              <!-- <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card project_widget">
                   <div class="header">
                     <h5>About</h5>
@@ -75,7 +83,7 @@
                     <br>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card project_widget">
                   <div class="header">

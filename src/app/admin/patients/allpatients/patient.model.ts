@@ -2,7 +2,7 @@ export class Patient {
   // tslint:disable-next-line: variable-name
   _id: number;
   img: string;
-  name: string;
+  // name: string;
   gender: string;
   bGroup: string;
   dob: string;
@@ -13,14 +13,14 @@ export class Patient {
   maritalStatus: string;
   patientRegistrationNumber: string;
   fullName: string;
-  // treatment: string;
+  treatment: string;
   constructor(patient) {
     {
       this._id = patient._id ;
       this.img = patient.avatar || 'assets/images/user/user1.jpg';
       this.fullName = patient.fullName || '';
       this.gender = patient.gender || 'male';
-      // this.bGroup = patient.email || '';
+      this.bGroup = patient.bGroup || '';
       this.dob = patient.dob || '';
       this.address = patient.address || '';
       this.contactNumber = patient.contactNumber || '';
@@ -28,7 +28,7 @@ export class Patient {
       this.city = patient.city || '';
       this.maritalStatus = patient.maritalStatus || '';
       this.patientRegistrationNumber = patient.patientRegistrationNumber || '';
-      // this.treatment = patient.treatment || '';
+      this.treatment = patient.treatment || '';
     }
   }
   // public getRandomID(): string {

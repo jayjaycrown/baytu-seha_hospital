@@ -13,6 +13,7 @@ import { BehaviorSubject, fromEvent, merge, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { SelectionModel } from "@angular/cdk/collections";
 import { Router } from '@angular/router';
+import { AlertService } from '@full-fledged/alerts';
 
 @Component({
   selector: "app-allpatients",
@@ -45,6 +46,7 @@ export class AllpatientsComponent implements OnInit {
     public patientService: PatientService,
     private snackBar: MatSnackBar,
     private router: Router,
+    public alertService: AlertService
   ) {}
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -80,38 +82,12 @@ export class AllpatientsComponent implements OnInit {
     // });
     this.router.navigateByUrl('/admin/patients/add-patient');
   }
-  editCall(row) {
-    // this.id = row.id;
-    // const dialogRef = this.dialog.open(FormDialogComponent, {
-    //   data: {
-    //     patient: row,
-    //     action: "edit",
-    //   },
-    // });
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === 1) {
-    //     // When using an edit things are little different, firstly we find record inside DataService by id
-    //     const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-    //       (x) => x._id === this.id
-    //     );
-    //     // Then you update that record using data from dialogData (values you enetered)
-    //     this.exampleDatabase.dataChange.value[
-    //       foundIndex
-    //     ] = this.patientService.getDialogData();
-    //     // And lastly refresh table
-    //     this.refreshTable();
-    //     this.showNotification(
-    //       "black",
-    //       "Edit Record Successfully...!!!",
-    //       "bottom",
-    //       "center"
-    //     );
-    //   }
-    // });
-    this.router.navigateByUrl('/admin/patients/edit-patient');
+  editCall(id) {
+    this.router.navigateByUrl('/admin/patients/edit-patient/' + id);
   }
-  viewCall() {
-    this.router.navigateByUrl('/admin/patients/patient-profile');
+  viewCall(id) {
+    // alert(id);
+    this.router.navigateByUrl('/admin/patients/profile/' + id);
   }
   deleteItem(i: number, row) {
     this.index = i;
@@ -127,12 +103,6 @@ export class AllpatientsComponent implements OnInit {
         // for delete we use splice in order to remove single object from DataService
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
-        this.showNotification(
-          "snackbar-danger",
-          "Delete Record Successfully...!!!",
-          "bottom",
-          "center"
-        );
       }
     });
   }
@@ -157,12 +127,15 @@ export class AllpatientsComponent implements OnInit {
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.renderedData.findIndex(
-        (d) => d === item
-      );
+      // const index: number = this.dataSource.renderedData.findIndex(
+      //   (d) => d === item
+      // );
+      const id = item._id;
+      this.patientService.deletePatient(id);
       // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.exampleDatabase.dataChange.value.splice(index, 1);
+      // this.exampleDatabase.dataChange.value.splice(index, 1);
       this.refreshTable();
+      this.refresh();
       this.selection = new SelectionModel<Patient>(true, []);
     });
     this.showNotification(
@@ -173,7 +146,7 @@ export class AllpatientsComponent implements OnInit {
     );
   }
   public loadData() {
-    this.exampleDatabase = new PatientService(this.httpClient);
+    this.exampleDatabase = new PatientService(this.httpClient, this.alertService);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -269,7 +242,7 @@ export class ExampleDataSource extends DataSource<Patient> {
           [propertyA, propertyB] = [a._id, b._id];
           break;
         case "name":
-          [propertyA, propertyB] = [a.name, b.name];
+          [propertyA, propertyB] = [a.fullName, b.fullName];
           break;
         case "gender":
           [propertyA, propertyB] = [a.gender, b.gender];

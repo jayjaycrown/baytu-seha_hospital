@@ -17,6 +17,6 @@ export class DeleteComponent {
     this.dialogRef.close();
   }
   confirmDelete(): void {
-    this.patientService.deletePatient(this.data.id);
+    this.patientService.deletePatient(this.data._id);
   }
 }

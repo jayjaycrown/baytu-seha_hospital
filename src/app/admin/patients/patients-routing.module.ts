@@ -16,11 +16,11 @@ const routes: Routes = [
     component: AddPatientComponent,
   },
   {
-    path: 'edit-patient',
+    path: 'edit-patient/:id',
     component: EditPatientComponent,
   },
   {
-    path: 'patient-profile',
+    path: 'profile/:id',
     component: PatientProfileComponent,
   },
   { path: '**', component: Page404Component },
